@@ -10,7 +10,7 @@ Before starting the project, I brainstormed about a few research questions which
 * What makes a machine breakdown and can we stop it from malfunctioning originally?
 * Can this prediction system be scaled up such that we predict possible failures of other machines?
 * What metric will we use to posit that a machine will break down in the future?
-* How long before can we predic if a machine will break down? Days? Weeks? Months?
+* How much in adcance can we predict if a machine will break down? Days? Weeks? Months?
 
 ## Methods
 
