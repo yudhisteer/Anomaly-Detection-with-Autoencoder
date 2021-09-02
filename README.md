@@ -20,6 +20,10 @@ Before starting the project, I brainstormed about a few research questions which
 
 ## Plan of Action
 
+## Limitations
+
+## Conclusion
+
 
 
 
