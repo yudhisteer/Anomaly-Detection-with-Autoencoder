@@ -96,7 +96,7 @@ We will then perform box-and-whisker plots to find outliers. We will not remove 
 ![Box and Whisker Plot](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/4.png)
 
 
-
+For better vizualization, we will chop our data into each days of the week. We will then create a dashboard with Plotly and Dash to visualize if there are anomalies on a particular day. 
 ![Dashboard](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/dashboard.jpg)
 
 
