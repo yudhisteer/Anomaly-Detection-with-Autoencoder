@@ -14,11 +14,27 @@ Before starting the project, I brainstormed about a few research questions which
 
 ## Methods
 
+
 ## Abstract
 
+
 ## Dataset(s)
+The data is generated from IoT sensors and sent to a server to be stored in a database. The system captures the data on a 3 minutes interval for 24 hours and the data is sent to the database on a weekly basis.
+
+* Raw_Data_Week.csv: contains 12 features with the timestamp for a particular week.
 
 ## Plan of Action
+
+1. Load Dataset
+2. Data Visualization
+3. Data Cleaning
+4. K-Means Clustering
+5. Build Autoencoder Model
+6. Picking an Embedding to Build the Model
+7. Train the model
+8. Evaluate Training
+9.  ROC and AUC Metrics
+10.  Picking a Threshold to Detect Anomalies
 
 ## Limitations
 
