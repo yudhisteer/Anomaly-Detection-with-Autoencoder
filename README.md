@@ -36,6 +36,19 @@ The data is generated from IoT sensors and sent to a server to be stored in a da
 9.  ROC and AUC Metrics
 10.  Picking a Threshold to Detect Anomalies
 
+## 1. Load Dataset
+![alt text](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/rawdata.jpg)
+## 2. Data Visualization
+## 3. Data Cleaning
+## 4. K-Means Clustering
+## 5. Build Autoencoder Model
+## 6. Picking an Embedding to Build the Model
+## 7. Train the model
+## 8. Evaluate Training
+## 9.  ROC and AUC Metrics
+## 10.  Picking a Threshold to Detect Anomalies
+
+
 ## Limitations
 
 ## Conclusion
