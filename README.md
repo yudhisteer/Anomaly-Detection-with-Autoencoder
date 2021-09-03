@@ -37,7 +37,7 @@ The data is generated from IoT sensors and sent to a server to be stored in a da
 10.  Picking a Threshold to Detect Anomalies
 
 ## 1. Load Dataset
-The dataset as shown below has 12 features with the timestamp. However, a lot of these features are redundant as their values are constant. To start simple, I selected only the date,  timestamp and the column "VibrationPump1_Output". 
+The dataset as shown below has 12 features with the timestamp. However, a lot of these features are redundant as their values are constant. To start simple, I selected only the date,  timestamp and the column "VibrationPump2_Output". 
 
 ![Raw Data](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/rawdata.jpg)
 
@@ -70,7 +70,7 @@ We start by loading our dataset for the first week. We rename the column for vib
 df_with_zeros = pd.read_csv('Raw_Data_Week1.csv')
 
 #Rename column for Vibration data
-df_with_zeros = df_with_zeros.rename(columns={'Vibration_Week1': 'VibrationPump1_Output'}
+df_with_zeros = df_with_zeros.rename(columns={'Vibration_Week1': 'VibrationPump2_Output'}
 
 #Drop vibration values of zero
 df_without_zeros = df_with_zeros[df_with_zeros['Vibration_Week1'] != 0]
@@ -93,7 +93,11 @@ We will do some exploratory data visualization first and proceed with more data 
 
 We will then perform box-and-whisker plots to find outliers. We will not remove these outliers for now as it is these outliers that our model will need to detect. Instead we will save these data as "Anomalous Data" and use them to test our model. 
 
-![Box and Whisker Plot]()
+![Box and Whisker Plot](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/4.png)
+
+
+
+![Dashboard](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/dashboard.jpg)
 
 
 
