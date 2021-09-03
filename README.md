@@ -64,6 +64,7 @@ from tensorflow.keras.models import Model
 ```
 
 ## 2. Data Cleaning
+We start by loading our dataset for the first week. We rename the column for vibration and remove the zero values in the latter. The zero values signify that the pump was off. We do not want our model to think that the zero values are anomalies hence, we discard them. We analyze the number of data points with which we will work and print the first 5 rows.
 ```
 # Read Dataset of Week 1
 df_with_zeros = pd.read_csv('Raw_Data_Week1.csv')
@@ -71,19 +72,31 @@ df_with_zeros = pd.read_csv('Raw_Data_Week1.csv')
 #Rename column for Vibration data
 df_with_zeros = df_with_zeros.rename(columns={'Vibration_Week1': 'VibrationPump1_Output'}
 
-#Drop Zeros
+#Drop vibration values of zero
 df_without_zeros = df_with_zeros[df_with_zeros['Vibration_Week1'] != 0]
 
 #Print number of datapoints
 len(df_without_zeros)
 
+#Checking type of Data
+print(df_without_zeros.dtypes)
+
 #Print first 5 rows of dataset
 print(df_without_zeros.head())
 
 ```
+Since we will do a time-series analysis it is important we set our date format in ```datetime64[ns]``` using ```pd.to_datetime```. 
 
+We will do some exploratory data visualization first and proceed with more data manipulation thereafter. 
 
 ## 3. Data Visualization
+
+We will then perform box-and-whisker plots to find outliers. We will not remove these outliers for now as it is these outliers that our model will need to detect. Instead we will save these data as "Anomalous Data" and use them to test our model. 
+
+![Box and Whisker Plot]()
+
+
+
 ## 4. K-Means Clustering
 ## 5. Build Autoencoder Model
 ## 6. Picking an Embedding to Build the Model
