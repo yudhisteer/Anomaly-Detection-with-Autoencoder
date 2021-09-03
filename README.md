@@ -37,9 +37,53 @@ The data is generated from IoT sensors and sent to a server to be stored in a da
 10.  Picking a Threshold to Detect Anomalies
 
 ## 1. Load Dataset
-![alt text](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/rawdata.jpg)
-## 2. Data Visualization
-## 3. Data Cleaning
+The dataset as shown below has 12 features with the timestamp. However, a lot of these features are redundant as their values are constant. To start simple, I selected only the date,  timestamp and the column "VibrationPump1_Output". 
+
+![Raw Data](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/rawdata.jpg)
+
+We also load the necessary libraries:
+```
+!pip install jupyter-dash
+import plotly.express as px
+from plotly.offline import iplot
+from jupyter_dash import JupyterDash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+import plotly.graph_objs as go
+!pip install dash
+import dash
+import pandas as pd
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_curve, auc
+from sklearn.model_selection import train_test_split
+from tensorflow.keras import layers, losses
+from tensorflow.keras.models import Model
+```
+
+## 2. Data Cleaning
+```
+# Read Dataset of Week 1
+df_with_zeros = pd.read_csv('Raw_Data_Week1.csv')
+
+#Rename column for Vibration data
+df_with_zeros = df_with_zeros.rename(columns={'Vibration_Week1': 'VibrationPump1_Output'}
+
+#Drop Zeros
+df_without_zeros = df_with_zeros[df_with_zeros['Vibration_Week1'] != 0]
+
+#Print number of datapoints
+len(df_without_zeros)
+
+#Print first 5 rows of dataset
+print(df_without_zeros.head())
+
+```
+
+
+## 3. Data Visualization
 ## 4. K-Means Clustering
 ## 5. Build Autoencoder Model
 ## 6. Picking an Embedding to Build the Model
