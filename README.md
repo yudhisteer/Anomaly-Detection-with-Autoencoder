@@ -96,9 +96,13 @@ We will then perform box-and-whisker plots to find outliers. We will not remove 
 ![Box and Whisker Plot](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/4.png)
 
 
-For better vizualization, we will chop our data into each days of the week. We will then create a dashboard with Plotly and Dash to visualize if there are anomalies on a particular day. 
+For better vizualization, we will chop our data into each day of the week. We will then create a dashboard with Plotly and Dash to visualize if there are anomalies on a particular day. 
+
+On day 1 for week 1, the motor has been on for only approx. 4 hours, from 19:45 to 23:59. For the other days, it is on for for 24 hours. 
+
 ![Dashboard](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/dashboard.jpg)
 
+We can already see an anomaly signal on Day 1 where the value decreases to below 10 ms-2 at 20:13:59 and then increases gradually to the normal value of approx. 20 ms-2. Even on Day 2 we can see some drop in the signal at noon and during the night. The good thing about this dataset is that it already has some anomalous data we can test our model with.
 
 
 ## 4. K-Means Clustering
