@@ -97,12 +97,40 @@ We will then perform box-and-whisker plots to find outliers. We will not remove 
 
 
 For better vizualization, we will chop our data into each day of the week. We will then create a dashboard with Plotly and Dash to visualize if there are anomalies on a particular day. 
+```
+# Launch the application:
+# Build App
+app = JupyterDash(__name__)
+
+# Create a DataFrame from the .csv file:
+app.layout = html.Div(children=[
+    # All elements from the top of the page
+    html.Div([
+        html.H1(children='Dashboard for vibration - Week 1'),
+
+        html.Div(children='''
+            Data for Day 1.
+        '''),
+        dcc.Graph(id = 'dashboard',
+                                 figure = {'data':[go.Scatter(x=df_W1D1['Time'],
+                                                              y = df_W1D1['Vibration_Day_1'],
+                                                               mode = 'lines' )],
+
+                                           'layout':go.Layout(
+                                               title = 'Vibration Day 1',
+                                               xaxis = {'title':'Time'},
+                                               yaxis = {'title': 'Vibration'}
+                                           )})])])
+                                           
+# Run app and display result inline in the notebook
+app.run_server(mode='external',port=8060)
+```
 
 On day 1 for week 1, the motor has been on for only approx. 4 hours, from 19:45 to 23:59. For the other days, it is on for for 24 hours. 
 
 ![Dashboard](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/dashboard.jpg)
 
-We can already see an anomaly signal on Day 1 where the value decreases to below 10 ms-2 at 20:13:59 and then increases gradually to the normal value of approx. 20 ms-2. Even on Day 2 we can see some drop in the signal at noon and during the night. The good thing about this dataset is that it already has some anomalous data we can test our model with.
+We can already see an anomaly signal on Day 1 where the value decreases to below 10 ms-2 at 20:13:59 and then increases gradually to the normal value of approx. 20 ms-2. Even on Day 2 we can see some drop in the signal at noon and during the night. The good thing about this dataset is that it already has some anomalous data which we can use to test our model. However, we need to clean the dataset of these anomalous data before training our model.
 
 
 ## 4. K-Means Clustering
