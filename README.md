@@ -89,7 +89,7 @@ Since we will do a time-series analysis it is important we set our date format i
 
 We will do some exploratory data visualization first and proceed with more data manipulation thereafter. 
 
-## 3. Data Visualization
+## 3. Exploratory Data Visualization
 
 We will then perform box-and-whisker plots to find outliers. We will not remove these outliers for now as it is these outliers that our model will need to detect. Instead we will save these data as "Anomalous Data" and use them to test our model. 
 
@@ -132,16 +132,24 @@ On day 1 for week 1, the motor has been on for only approx. 4 hours, from 19:45 
 
 We can already see an anomaly signal on Day 1 where the value decreases to below 10 ms-2 at 20:13:59 and then increases gradually to the normal value of approx. 20 ms-2. Even on Day 2 we can see some drop in the signal at noon and during the night. The good thing about this dataset is that it already has some anomalous data which we can use to test our model. However, we need to clean the dataset of these anomalous data before training our model.
 
+## 4. Data Wrangling
+We have 1440 data points in one single day. Since we will be doing a time-series analysis, we will split our waveform into equal segments of 180 datapoints. This will increase our dataset in training our model but also allow us to segment anomalous data. We will then create two dataframes containing "Normal Vibration" data and "Anamalous Vibration" data.
+
+
+
 ## 4. K-Means Clustering
 K-means clustering is a simple and useful unsupervised learning algorithm. The goal of K-means clustering is to group similar data points into a set number (K) of groups. The algorithms does this by identifying 'centroids', which are the centers of clusters, and then allocating data points to the nearest cluster.
+
+We will begin by segmenting an anomalous data from the dataset for anomaly detection using K-means. 
 
 How to know number of clusters(K)?
 The technique to determine K, the number of clusters, is called the **elbow method**. 
 
 We’ll plot:
 
-values for K on the horizontal axis
-the distortion on the Y axis (the values calculated with the cost function).
+- values for K on the horizontal axis
+- the distortion on the Y axis (the values calculated with the cost function).
+- 
 This result in:
 
 
