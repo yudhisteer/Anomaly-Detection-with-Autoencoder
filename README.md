@@ -195,7 +195,12 @@ plt.scatter(np.arange(180),data_with_clusters['Anomalous'],data_with_clusters['N
 plt.title("Kmeans Clustering with K = 2")
 plt.show()
 ```
+![ds](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/kmeans.png)
 
+Our simple model did a pretty good job!
+Now we have a way to classify abnormal data in a simple one dimensional space. We can adjust the percentile_treshold variable to see how that impacts the number of false positives and false negatives.
+
+We will move on to work with autoencoder where our semi-supervised model will be trained on the normal rhythms only, then use it to reconstruct all the data. Our hypothesis is that the abnormal rhythms will have higher reconstruction error. We will then classify a rhythm as an anomaly if the reconstruction error surpasses a fixed threshold.
 
 ## 5. Build Autoencoder Model
 ## 6. Picking an Embedding to Build the Model
