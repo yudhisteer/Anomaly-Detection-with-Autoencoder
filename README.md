@@ -198,6 +198,7 @@ plt.show()
 ![ds](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/kmeans.png)
 
 Our simple model did a pretty good job!
+The red dots are classified as anomaly and the purple ones as normal data.
 Now we have a way to classify abnormal data in a simple one dimensional space. We can adjust the percentile_treshold variable to see how that impacts the number of false positives and false negatives.
 
 We will move on to work with autoencoder where our semi-supervised model will be trained on the normal rhythms only, then use it to reconstruct all the data. Our hypothesis is that the abnormal rhythms will have higher reconstruction error. We will then classify a rhythm as an anomaly if the reconstruction error surpasses a fixed threshold.
