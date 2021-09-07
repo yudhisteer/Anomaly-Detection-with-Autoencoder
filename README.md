@@ -132,8 +132,19 @@ On day 1 for week 1, the motor has been on for only approx. 4 hours, from 19:45 
 
 We can already see an anomaly signal on Day 1 where the value decreases to below 10 ms-2 at 20:13:59 and then increases gradually to the normal value of approx. 20 ms-2. Even on Day 2 we can see some drop in the signal at noon and during the night. The good thing about this dataset is that it already has some anomalous data which we can use to test our model. However, we need to clean the dataset of these anomalous data before training our model.
 
-
 ## 4. K-Means Clustering
+K-means clustering is a simple and useful unsupervised learning algorithm. The goal of K-means clustering is to group similar data points into a set number (K) of groups. The algorithms does this by identifying 'centroids', which are the centers of clusters, and then allocating data points to the nearest cluster.
+
+How to know number of clusters(K)?
+The technique to determine K, the number of clusters, is called the **elbow method**. 
+
+We’ll plot:
+
+values for K on the horizontal axis
+the distortion on the Y axis (the values calculated with the cost function).
+This result in:
+
+
 ## 5. Build Autoencoder Model
 ## 6. Picking an Embedding to Build the Model
 ## 7. Train the model
