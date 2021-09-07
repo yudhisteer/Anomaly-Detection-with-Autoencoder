@@ -133,8 +133,22 @@ On day 1 for week 1, the motor has been on for only approx. 4 hours, from 19:45 
 We can already see an anomaly signal on Day 1 where the value decreases to below 10 ms-2 at 20:13:59 and then increases gradually to the normal value of approx. 20 ms-2. Even on Day 2 we can see some drop in the signal at noon and during the night. The good thing about this dataset is that it already has some anomalous data which we can use to test our model. However, we need to clean the dataset of these anomalous data before training our model.
 
 ## 4. Data Wrangling
-We have 1440 data points in one single day. Since we will be doing a time-series analysis, we will split our waveform into equal segments of 180 datapoints. This will increase our dataset in training our model but also allow us to segment anomalous data. We will then create two dataframes containing "Normal Vibration" data and "Anamalous Vibration" data.
+We have 1440 data points in one single day. Since we will be doing a time-series analysis, we will split our waveform into equal segments of 180 datapoints. This will increase our dataset in training our model and also allow us to segment anomalous data. We will then create two dataframes separating "Normal Vibration" data from "Anomalous Vibration" data.
 
+```
+#Slicing of data based on index
+df_W1D1_1 = df_W1D1[['Vibration_Day_1']].loc['1185':'1364']
+
+#Changing Columns name
+df_W1D1_1 = df_W1D1_1.rename(columns={'Vibration_Day_1': 'Vibration_Day_1_I1'})
+
+df_W1D1_1_index = df_W1D1_1.reset_index(drop=True)
+df_W1D1_1_index
+```
+
+![SEGMENT](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/Garment%20Measurement.jpg)
+
+We can see in the Anomalous Data segment that half the signal is an anomaly and the other half is a normal signal. This will allow us to test if K-means can identify this irregularity. 
 
 
 ## 4. K-Means Clustering
