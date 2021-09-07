@@ -160,9 +160,14 @@ The technique to determine K, the number of clusters, is called the **elbow meth
 We’ll plot:
 - values for K on the horizontal axis
 - the distortion on the Y axis (the values calculated with the cost function).
-- 
+
 This result in:
-![SEGMENT]()
+
+![SEGMENT](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/elbow.png)
+
+As the value of K increases, there will be fewer elements in the cluster. In the above plot, the elbow is at k=2 (i.e. Sum of squared distances falls suddenly) indicating the optimal k for this dataset is 2.
+
+
 
 ## 5. Build Autoencoder Model
 ## 6. Picking an Embedding to Build the Model
