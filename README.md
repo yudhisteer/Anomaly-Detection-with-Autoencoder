@@ -161,12 +161,40 @@ We’ll plot:
 - values for K on the horizontal axis
 - the distortion on the Y axis (the values calculated with the cost function).
 
+```
+# k means determine k
+distortions = []
+K = range(1,10)
+for k in K:
+    kmeanModel = KMeans(n_clusters=k).fit(x)
+    kmeanModel.fit(x)
+    distortions.append(sum(np.min(cdist(x, kmeanModel.cluster_centers_, 'euclidean'), axis=1)) / x.shape[0])
+
+# Plot the elbow
+figure(figsize=(8, 6), dpi=80)
+plt.plot(K, distortions, 'bx-')
+plt.xlabel('k')
+plt.ylabel('Distortion')
+plt.title('The Elbow Method showing the optimal k')
+plt.show()
+```
+
 This result in:
 
 ![SEGMENT](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/elbow.png)
 
-As the value of K increases, there will be fewer elements in the cluster. In the above plot, the elbow is at k=2 (i.e. Sum of squared distances falls suddenly) indicating the optimal k for this dataset is 2.
+In the above plot, the elbow is at k=2 (i.e. Sum of squared distances falls suddenly) indicating the optimal k for this dataset is 2.
 
+We will then pass our anomalous data into our K-means model with K = 2 to check how well it is classified.
+```
+data_with_clusters = df.copy()
+from matplotlib.pyplot import figure
+figure(figsize=(8, 6), dpi=80)
+data_with_clusters['Clusters'] = identified_clusters 
+plt.scatter(np.arange(180),data_with_clusters['Anomalous'],data_with_clusters['Normal'], c=data_with_clusters['Clusters'],cmap='rainbow')
+plt.title("Kmeans Clustering with K = 2")
+plt.show()
+```
 
 
 ## 5. Build Autoencoder Model
