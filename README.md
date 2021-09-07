@@ -154,18 +154,15 @@ We can see in the Anomalous Data segment that half the signal is an anomaly and 
 ## 4. K-Means Clustering
 K-means clustering is a simple and useful unsupervised learning algorithm. The goal of K-means clustering is to group similar data points into a set number (K) of groups. The algorithms does this by identifying 'centroids', which are the centers of clusters, and then allocating data points to the nearest cluster.
 
-We will begin by segmenting an anomalous data from the dataset for anomaly detection using K-means. 
-
 How to know number of clusters(K)?
-The technique to determine K, the number of clusters, is called the **elbow method**. 
+The technique to determine K, the number of clusters, is called the **elbow method**. The idea is to run k-means clustering for a range of clusters k (1 to 10) and for each value, we are calculating the sum of squared distances from each point to its assigned center(distortions).
 
 We’ll plot:
-
 - values for K on the horizontal axis
 - the distortion on the Y axis (the values calculated with the cost function).
 - 
 This result in:
-
+![SEGMENT]()
 
 ## 5. Build Autoencoder Model
 ## 6. Picking an Embedding to Build the Model
