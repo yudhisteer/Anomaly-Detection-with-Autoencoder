@@ -338,9 +338,60 @@ plt.show()
 ## 8. Evaluate Training
 We will soon classify a vibrational data as anomalous if the reconstruction error is greater than one standard deviation from the normal training examples. First, let's plot a normal data point from the training set, the reconstruction after it's encoded and decoded by the autoencoder, and the reconstruction error.
 
+```
+encoded_imgs = autoencoder.encoder(anomalous_test_data).numpy()
+decoded_imgs = autoencoder.decoder(encoded_imgs).numpy()
+figure(figsize=(10, 6), dpi=80)
+plt.plot( anomalous_train_data[0],'b')
+plt.plot(decoded_imgs[0],'r')
+plt.fill_between(np.arange(180), decoded_imgs[0],  anomalous_train_data[0], color='lightcoral' )
+plt.legend(labels=["Input", "Reconstruction", "Error"])
+plt.title('Detecting Anomalies')
+plt.show()  
+```
 
+![data](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/detecting_anomalies.png)
+
+We can clearly see the divergence from the reconstruction pattern of the autoencoder after being trained on normal data points and the actual anomalous data. The shaded region shows the Aread Under Curve(AUC) between the two signals which we will use as a threshold to classify future anomalies. 
 
 ## 9.  ROC and AUC Metrics
+The Receiver Operating Characteristic (ROC) plots allows us to visualize the tradeoff between predicting anomalies as normal (false positives) and predicting normal data as an anomaly (false negative). Normal rhythms are labeled as 1 in this dataset but we have to flip them here to match the ROC curves expectations.
+
+The ROC plot now has threshold values plotted on their corrispoinding points on the curve to aid in selecting a theshold for the application.
+
+```
+reconstructions = autoencoder(test_data)
+loss = tf.keras.losses.mae(reconstructions, test_data)
+fpr = []
+tpr = []
+#the test labels are flipped to match how the roc_curve function expects them.
+flipped_labels = 1-test_labels 
+fpr, tpr, thresholds = roc_curve(flipped_labels, loss)
+plt.figure()
+lw = 2
+plt.plot(fpr, tpr, color='darkorange',
+         lw=lw, label='ROC curve ')
+plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic example')
+plt.legend(loc="lower right")
+
+# plot some thresholds
+thresholds_every=20
+thresholdsLength = len(thresholds)
+colorMap=plt.get_cmap('jet', thresholdsLength)
+for i in range(0, thresholdsLength, thresholds_every):
+  threshold_value_with_max_four_decimals = str(thresholds[i])[:5]
+  plt.scatter(fpr[i], tpr[i], c='black')
+  plt.text(fpr[i] - 0.03, tpr[i] + 0.005, threshold_value_with_max_four_decimals, fontdict={'size': 15});
+
+plt.show()
+```
+
+()
 ## 10.  Picking a Threshold to Detect Anomalies
 
 
