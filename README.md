@@ -332,9 +332,14 @@ plt.plot(history.history["val_loss"], label="Validation Loss")
 plt.legend()
 plt.show()
 ```
+![loss](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/loss.png)
 
 
 ## 8. Evaluate Training
+We will soon classify a vibrational data as anomalous if the reconstruction error is greater than one standard deviation from the normal training examples. First, let's plot a normal data point from the training set, the reconstruction after it's encoded and decoded by the autoencoder, and the reconstruction error.
+
+
+
 ## 9.  ROC and AUC Metrics
 ## 10.  Picking a Threshold to Detect Anomalies
 
