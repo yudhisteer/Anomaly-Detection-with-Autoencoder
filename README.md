@@ -215,7 +215,13 @@ In simple terms, create an encoder network on the left-hand side, whose job is t
 
 It's not going to be able to generate that original image, thus, when we do the difference between the two of them, it's going to be significantly larger, because it only knows how to reconstruct the normal data that it's been trained on. So when it sees an abnormal data, the error is going to be large. Hence, it can be applied to anomaly detection by training only on normal data and then using the reconstruction error to determine if a new input is similar to the normal training data.
 
+### Types of autoencoders:
+* Fully Connected Autoencoder
+* Convolutional Autoencoder
+* LSTM Autoencoders
+* Variational Autoencoders
 
+Because we are dealing we a one dimensional problem, I chose the a deep fully-connected autoencoder which has multiple fully connected layers with some small embedding in the middle. They are the most basic form of an autoencoder and are simple to implement and deploy.
 
 ## 6. Picking an Embedding to Build the Model
 ## 7. Train the model
