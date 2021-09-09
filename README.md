@@ -201,9 +201,21 @@ Our simple model did a pretty good job!
 The red dots are classified as anomaly and the purple ones as normal data.
 Now we have a way to classify abnormal data in a simple one dimensional space. We can adjust the percentile_treshold variable to see how that impacts the number of false positives and false negatives.
 
+One of the key problems that K-Means has is that as the data set increases, or the number of observations we have in your collection actually increases, K-Means starts to fall apart. Especially when we have high dimensional data, it does really poor.
+
 We will move on to work with autoencoder where our semi-supervised model will be trained on the normal rhythms only, then use it to reconstruct all the data. Our hypothesis is that the abnormal rhythms will have higher reconstruction error. We will then classify a rhythm as an anomaly if the reconstruction error surpasses a fixed threshold.
 
 ## 5. Build Autoencoder Model
+With anomaly detection, the problem is that we have a lot of data for the normal behavior and those really important, yet rare events are the ones that we care about the most. We have to come to terms with the fact that we don't know what we don't know. We don't know the 1,000 ways in which the machine might fail. But there is one thing that we do know really well. We do know how the machine is supposed to work.
+We don't know the various anomalies that we might see, but when everything is good, we know what that pattern is supposed to be. We can exploit the fact that we have lots of normal data, forgetting the anomaly itself. What we want to do is, effectively, we want to build in an ideal class, a neural network that can act as an identity function. In other words, it's supposed to be able to take an input and regenerate the exact same input.
+
+Because we have lots of normal data, we can certainly
+architect a neural network to be able to take
+a set of inputs on the left-hand side and split them out
+on the right-hand side.
+
+Autoencoders can be applied to anomaly detection by training only on normal data and then using the reconstruction error to determine if a new input is similar to the normal training data.
+
 ## 6. Picking an Embedding to Build the Model
 ## 7. Train the model
 ## 8. Evaluate Training
