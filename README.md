@@ -253,7 +253,9 @@ data = raw_data[:, 0:-1]
 # Splitting data into training and test set
 train_data, test_data, train_labels, test_labels = train_test_split(
     data, labels, test_size=0.4, random_state=21)
+   
 ```
+![data](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/data.jpg)
 
 We normalize the data to ```[0,1]``` to improve training accuracy.
 
