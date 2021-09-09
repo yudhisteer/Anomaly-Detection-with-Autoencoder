@@ -412,7 +412,7 @@ print(roc_auc)
 
 Tuning the threshold hyperparameter depends on the  application and the consequences of a false positive and a false negative. If we think a ```2%``` error can be fatal, then we can put the threshold at this value such that everytime there is a slight anomaly in the data, it will alert the user. However, with such a tight threhold, we can risk on encountering a lot of FP and unnecessarily send alert messages to the user. Now if we increase the acceptable error rate to, let's say, ```55%```, we can now risk of not sending alert messages when encountering potential anomalies. This can now have a higher impact where it will fail to alert the user of potential future breakdown.
 
-To be on the safe side, I chose an acceptable error rate of ```37%```. We will test the accuracy, precison and recall based on this value.
+To be on the safe side, I chose an acceptable error rate of ```37%```. We will test the **accuracy, precison** and **recall** based on this value.
 
 ```
 def predict(model, data, threshold):
