@@ -151,7 +151,7 @@ df_W1D1_1_index
 We can see in the Anomalous Data segment that half the signal is an anomaly and the other half is a normal signal. This will allow us to test if K-means can identify this irregularity. 
 
 
-## 4. K-Means Clustering
+## 5. K-Means Clustering
 K-means clustering is a simple and useful unsupervised learning algorithm. The goal of K-means clustering is to group similar data points into a set number (K) of groups. The algorithms does this by identifying 'centroids', which are the centers of clusters, and then allocating data points to the nearest cluster.
 
 How to know number of clusters(K)?
@@ -205,7 +205,7 @@ One of the key problems that K-Means has is that as the data set increases, or t
 
 We will move on to work with autoencoder where our semi-supervised model will be trained on the normal rhythms only, then use it to reconstruct all the data. Our hypothesis is that the abnormal rhythms will have higher reconstruction error. We will then classify a rhythm as an anomaly if the reconstruction error surpasses a fixed threshold.
 
-## 5. Build Autoencoder Model
+## 6. Build Autoencoder Model
 With anomaly detection, the problem is that we have a lot of data for the normal behavior and those really important, yet rare events are the ones that we care about the most. We have to come to terms with the fact that we don't know what we don't know. We don't know the 1,000 ways in which the machine might fail. But there is one thing that we do know really well. We do know how the machine is supposed to work.
 We don't know the various anomalies that we might see, but when everything is good, we know what that pattern is supposed to be. We can exploit the fact that we have lots of normal data, forgetting the anomaly itself. What we want to do is, effectively, we want to build in an ideal class, a neural network that can act as an identity function. In other words, it's supposed to be able to take an input and regenerate the exact same input.
 
@@ -288,7 +288,7 @@ combined_train_data = np.append(normal_train_data, anomalous_test_data[:end_size
 combined_train_data.shape
 ```
 
-## 6. Picking an Embedding to Build the Model
+## 7. Picking an Embedding to Build the Model
 
 For the encoder part, I chose a layer with ```32``` neurons and one with ```16``` neurons with a ```relu``` activation function. The smallest layer has an embedding size of ```2```. The decoder, being the inverse of the encoder, has a firs tlayer of ```16``` neurons then a layer of ```32``` neurons. And a last layer of ```180``` neurons - since we split each data into 180 data points - with a ```sigmoid``` activation function.
 ```
@@ -315,7 +315,7 @@ autoencoder = AnomalyDetector()
 print("Chosen Embedding Size: ", EMBEDDING_SIZE)
 ```
 
-## 7. Train the model
+## 8. Train the model
 The autoencoder is trained using only the normal data, but is evaluated using the full test set.
 
 ```
@@ -335,7 +335,7 @@ plt.show()
 ![loss](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/loss.png)
 
 
-## 8. Evaluate Training
+## 9. Evaluate Training
 We will soon classify a vibrational data as anomalous if the reconstruction error is greater than one standard deviation from the normal training examples. First, let's plot a normal data point from the training set, the reconstruction after it's encoded and decoded by the autoencoder, and the reconstruction error.
 
 ```
@@ -354,7 +354,7 @@ plt.show()
 
 We can clearly see the divergence from the reconstruction pattern of the autoencoder after being trained on normal data points and the actual anomalous data. The shaded region shows the Aread Under Curve(AUC) between the two signals which we will use as a threshold to classify future anomalies. 
 
-## 9.  ROC and AUC Metrics
+## 10.  ROC and AUC Metrics
 The Receiver Operating Characteristic (ROC) plots allows us to visualize the tradeoff between predicting anomalies as normal (false positives) and predicting normal data as an anomaly (false negative). Normal rhythms are labeled as 1 in this dataset but we have to flip them here to match the ROC curves expectations.
 
 The ROC plot now has threshold values plotted on their corrispoinding points on the curve to aid in selecting a theshold for the application.
@@ -408,7 +408,7 @@ print(roc_auc)
 ```
 0.8483482142857142
 ```
-## 10.  Picking a Threshold to Detect Anomalies
+## 11.  Picking a Threshold to Detect Anomalies
 
 Tuning the threshold hyperparameter depends on the  application and the consequences of a false positive and a false negative. If we think a ```2%``` error can be fatal, then we can put the threshold at this value such that everytime there is a slight anomaly in the data, it will alert the user. However, with such a tight threhold, we can risk on encountering a lot of FP and unnecessarily send alert messages to the user. Now if we increase the acceptable error rate to, let's say, ```55%```, we can now risk of not sending alert messages when encountering potential anomalies. This can now have a higher impact where it will fail to alert the user of potential future breakdown.
 
