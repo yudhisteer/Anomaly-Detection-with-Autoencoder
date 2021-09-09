@@ -223,6 +223,38 @@ It's not going to be able to generate that original image, thus, when we do the 
 
 Because we are dealing we a one dimensional problem, I chose the a deep fully-connected autoencoder which has multiple fully connected layers with some small embedding in the middle. They are the most basic form of an autoencoder and are simple to implement and deploy.
 
+![autoencoder](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/autoencoder.jpg)
+
+We will concatenante our split normal data into one dataframe and transpose it such that each row contains 180 data points. We will label our data as ```1``` as normal data and ```0``` as anomaly. 
+
+```
+# Concatanate Data
+df_concat =  pd.concat([df_W1D2_1_index, df_W1D2_2_index, df_W1D2_3_index, df_W1D2_4_index, df_W1D2_5_index, df_W1D2_6_index, df_W1D2_7_index, df_W1D2_8_index, df_W1D1_1_index], axis=1)
+
+#Transpose Concatanated Data
+df_concat_Transposed = df_W1D2_concat.T 
+
+#Resetting Index
+df_concat_Transposed = df_concat_Transposed.reset_index(drop=True)
+
+#Add Labels
+df_concat =  pd.concat([df_concat_Transposed, Labels], axis=1)
+```
+
+We will then split our data with ```train_test_split```
+
+```
+# The last element contains the labels
+labels = raw_data[:, -1]
+
+# The other data points are the electrocadriogram data
+data = raw_data[:, 0:-1]
+
+# Splitting data into training and test set
+train_data, test_data, train_labels, test_labels = train_test_split(
+    data, labels, test_size=0.4, random_state=21)
+```
+
 ## 6. Picking an Embedding to Build the Model
 ## 7. Train the model
 ## 8. Evaluate Training
