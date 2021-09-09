@@ -211,9 +211,11 @@ We don't know the various anomalies that we might see, but when everything is go
 
 Because we have lots of normal data, we can certainly architect a neural network to be able to take a set of inputs on the left-hand side and split them out on the right-hand side. That's where the interesting aspects come in. When you have a lot of input signals that are coming in, there's a lot of noise in these signals. What we really want to do, is we want to compress that input signal down to its core fundamental elements. In other words, you want to eliminate the noise that's in the signal and really get to the essence of that signal. And that's where the autoencoder comes to bear.
 
+In simple terms, create an encoder network on the left-hand side, whose job is to take this high dimensional data that's coming in on the input neurons and then compress it down into this core compressed latent space representation, which we can then deconstruct via the decoder to reconstruct the original signal. It is possible to get a reconstructed network that minimizes this delta between what the input signal looks like and what that output signal needs to look like. In effect, you want to minimize the **reconstruction loss**. 
+
+It's not going to be able to generate that original image, thus, when we do the difference between the two of them, it's going to be significantly larger, because it only knows how to reconstruct the normal data that it's been trained on. So when it sees an abnormal data, the error is going to be large. Hence, it can be applied to anomaly detection by training only on normal data and then using the reconstruction error to determine if a new input is similar to the normal training data.
 
 
-Autoencoders can be applied to anomaly detection by training only on normal data and then using the reconstruction error to determine if a new input is similar to the normal training data.
 
 ## 6. Picking an Embedding to Build the Model
 ## 7. Train the model
