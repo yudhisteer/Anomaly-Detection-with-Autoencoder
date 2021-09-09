@@ -209,10 +209,9 @@ We will move on to work with autoencoder where our semi-supervised model will be
 With anomaly detection, the problem is that we have a lot of data for the normal behavior and those really important, yet rare events are the ones that we care about the most. We have to come to terms with the fact that we don't know what we don't know. We don't know the 1,000 ways in which the machine might fail. But there is one thing that we do know really well. We do know how the machine is supposed to work.
 We don't know the various anomalies that we might see, but when everything is good, we know what that pattern is supposed to be. We can exploit the fact that we have lots of normal data, forgetting the anomaly itself. What we want to do is, effectively, we want to build in an ideal class, a neural network that can act as an identity function. In other words, it's supposed to be able to take an input and regenerate the exact same input.
 
-Because we have lots of normal data, we can certainly
-architect a neural network to be able to take
-a set of inputs on the left-hand side and split them out
-on the right-hand side.
+Because we have lots of normal data, we can certainly architect a neural network to be able to take a set of inputs on the left-hand side and split them out on the right-hand side. That's where the interesting aspects come in. When you have a lot of input signals that are coming in, there's a lot of noise in these signals. What we really want to do, is we want to compress that input signal down to its core fundamental elements. In other words, you want to eliminate the noise that's in the signal and really get to the essence of that signal. And that's where the autoencoder comes to bear.
+
+
 
 Autoencoders can be applied to anomaly detection by training only on normal data and then using the reconstruction error to determine if a new input is similar to the normal training data.
 
