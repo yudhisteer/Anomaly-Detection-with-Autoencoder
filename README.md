@@ -391,7 +391,23 @@ for i in range(0, thresholdsLength, thresholds_every):
 plt.show()
 ```
 
-()
+![auc](https://github.com/yudhisteer/Anomaly-Detection-with-Autoencoder/blob/main/Plots/auc.png)
+
+Since our model does a great job in diferentiating normal rythms from abnormal ones it seems easy to pick the threshold that would give us the high true positive rate (TPR) and low false positive rate (FPR) that is at the 'knee' of the curve.
+
+However, in some cases there may be an application constraint that requires a specific TPR or FPR, in which case we would have to move off of the 'knee' and sacrifice overall accuracy. In this case we might rather have false alarms than miss a potentially dangerous rythm.
+
+Now that we understand how to visualize the impact of the selected threshold, we calculate the area under the ROC curve (AUC).
+
+This metric is very useful for evalutation of a specfic model design. We will adjust the size of the encoding layer (smallest layer) in the autoencoder to maximize this metric.
+
+```
+roc_auc = auc(fpr, tpr)
+print(roc_auc)
+```
+```
+0.8483482142857142
+```
 ## 10.  Picking a Threshold to Detect Anomalies
 
 
