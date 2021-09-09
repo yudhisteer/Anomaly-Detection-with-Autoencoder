@@ -241,7 +241,7 @@ df_concat_Transposed = df_concat_Transposed.reset_index(drop=True)
 df_concat =  pd.concat([df_concat_Transposed, Labels], axis=1)
 ```
 
-We will then split our data with ```train_test_split```
+We will then split our data with ```train_test_split()```
 
 ```
 # The last element contains the labels
@@ -255,7 +255,67 @@ train_data, test_data, train_labels, test_labels = train_test_split(
     data, labels, test_size=0.4, random_state=21)
 ```
 
+We normalize the data to ```[0,1]``` to improve training accuracy.
+
+```
+min_val = tf.reduce_min(train_data)
+max_val = tf.reduce_max(train_data)
+
+train_data = (train_data - min_val) / (max_val - min_val)
+test_data = (test_data - min_val) / (max_val - min_val)
+
+train_data = tf.cast(train_data, tf.float32)
+test_data = tf.cast(test_data, tf.float32)
+```
+
+This time we are mixing in some of the anomaly data into the training set.
+
+10% of the training data will contain anomalies. Since the majority of the training data is still normal data, we can still train a high performing model as long as we don't overfit to the training data. This is to reflect a truely unsupervised scenario. Since the majority of our training data is still normal, we are still able to train a high performing model as long as we don't overfit to our training data. Train the autoencoder using only the normal rhythms, which are labeled in this dataset as 1. Separate the normal rhythms from the abnormal rhythms.
+
+```
+train_labels = train_labels.astype(bool)
+test_labels = test_labels.astype(bool)
+
+normal_train_data = train_data[train_labels]
+normal_test_data = test_data[test_labels]
+
+anomalous_train_data = train_data[~train_labels]
+anomalous_test_data = test_data[~test_labels]
+
+portion_of_anomaly_in_training = 0.1 #10% of training data will be anomalies
+end_size = int(len(normal_train_data)/(10-portion_of_anomaly_in_training*10))
+combined_train_data = np.append(normal_train_data, anomalous_test_data[:end_size], axis=0)
+combined_train_data.shape
+```
+
 ## 6. Picking an Embedding to Build the Model
+
+For the Encoder part, I chose a layer with ```32``` neurons and one with ```16``` neurons with a ```relu``` activation dunction. The smallest layer has an embedding size of ```2```. The decoder, being the inverse of the encoder, has a firs tlayer of ```16``` neurons then a layer of ```32``` neurons. And a last layer of ```180``` neurons - since we split each data into 180 data point - with a ```sigmoid``` activation function.
+
+```
+EMBEDDING_SIZE = 2
+
+class AnomalyDetector(Model):
+  def __init__(self):
+    super(AnomalyDetector, self).__init__()
+    self.encoder = tf.keras.Sequential([
+      layers.Dense(8, activation="relu"),
+      
+      layers.Dense(EMBEDDING_SIZE, activation="relu")]) # Smallest Layer Defined Here
+    
+    self.decoder = tf.keras.Sequential([
+      layers.Dense(8, activation="relu"),
+      layers.Dense(140, activation="sigmoid")])
+    
+  def call(self, x):
+    encoded = self.encoder(x)
+    decoded = self.decoder(encoded)
+    return decoded
+
+autoencoder = AnomalyDetector()
+print("Chosen Embedding Size: ", EMBEDDING_SIZE)
+```
+
 ## 7. Train the model
 ## 8. Evaluate Training
 ## 9.  ROC and AUC Metrics
