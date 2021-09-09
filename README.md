@@ -290,8 +290,7 @@ combined_train_data.shape
 
 ## 6. Picking an Embedding to Build the Model
 
-For the Encoder part, I chose a layer with ```32``` neurons and one with ```16``` neurons with a ```relu``` activation dunction. The smallest layer has an embedding size of ```2```. The decoder, being the inverse of the encoder, has a firs tlayer of ```16``` neurons then a layer of ```32``` neurons. And a last layer of ```180``` neurons - since we split each data into 180 data point - with a ```sigmoid``` activation function.
-
+For the encoder part, I chose a layer with ```32``` neurons and one with ```16``` neurons with a ```relu``` activation function. The smallest layer has an embedding size of ```2```. The decoder, being the inverse of the encoder, has a firs tlayer of ```16``` neurons then a layer of ```32``` neurons. And a last layer of ```180``` neurons - since we split each data into 180 data points - with a ```sigmoid``` activation function.
 ```
 EMBEDDING_SIZE = 2
 
@@ -317,6 +316,24 @@ print("Chosen Embedding Size: ", EMBEDDING_SIZE)
 ```
 
 ## 7. Train the model
+The autoencoder is trained using only the normal data, but is evaluated using the full test set.
+
+```
+history = autoencoder.fit(normal_train_data, normal_train_data, 
+          epochs=100, 
+          batch_size=2,
+          validation_data=(test_data, test_data),
+          shuffle=True)
+```
+
+```
+plt.plot(history.history["loss"], label="Training Loss")
+plt.plot(history.history["val_loss"], label="Validation Loss")
+plt.legend()
+plt.show()
+```
+
+
 ## 8. Evaluate Training
 ## 9.  ROC and AUC Metrics
 ## 10.  Picking a Threshold to Detect Anomalies
