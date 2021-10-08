@@ -13,10 +13,16 @@ Before starting the project, I brainstormed about a few research questions which
 * How much in advance can we predict if a machine will break down? Days? Weeks? Months?
 
 ## Methods
+The analytical methods below were used to answer the research questions above:
 
+- Clean the data using Numpy and Pandas and select the variables that will be useful for prediction.
+- Use Plotly and Dash to build a dashboard for data visualization.
+- Examine scaterring of anomalous data points using K-means.
+- Prepare the data for autoencoder model and plot reconstruction error using Matplotlib.
+- Plot ROC and AUC metrics to visualize tradeoff between FP and FN.
 
 ## Abstract
-
+The goal of the project was to be able to predict the breakdown of a machine using a set of parameters. With my analysis based on only one variable, vibrations, I was successful in designing an autoencoder model with an accuracy of ```94.5%``` and a ROC accuracy of ```84%```. Prediction of future breadkdowns is possible but it is important to keep in mind that the model is not scalable, that is, the anomaly detection model of the AC motor will not be able to predict anomalies of a Boiler, for example. For such complex machines, a range of variables is preferred and a huge amount of data will give better predictions. 
 
 ## Dataset(s)
 The data is generated from IoT sensors and sent to a server to be stored in a database. The system captures the data on a 3 minutes interval for 24 hours and the data is sent to the database on a weekly basis.
